@@ -2,6 +2,7 @@ package migrations
 
 import (
 	"log"
+	"math/rand"
 
 	"gorm.io/gorm"
 
@@ -15,13 +16,26 @@ func seed(db *gorm.DB) error {
 
 	// Product
 	for i := 0; i < 10; i++ {
-		data := _entities.Product{}
-		err := faker.FakeData(&data)
-		if err != nil {
+		product := _entities.Product{}
+		if err := faker.FakeData(&product); err != nil {
 			log.Println(_color.ThisF("yellow", "[seeder] failed faking data: %v", err))
 		}
-		db.Save(&data)
-		log.Println(_color.ThisF("green", "[seeder] ✅ success seeding product data: [id: %d, product: %s]", data.ID, data.Name))
+		db.Save(&product)
+		log.Println(_color.ThisF("green", "[seeder] ✅ success seeding product data: [id: %d, product: %s]", product.ID, product.Name))
+
+
+		// Product Variants
+		nVariants := rand.Intn(5)
+		for i := 0; i < nVariants; i++ {
+			variant := _entities.ProductVariant{}
+			if err := faker.FakeData(&variant); err != nil {
+				log.Println(_color.ThisF("yellow", "[seeder] failed faking data: %v", err))
+			}
+			variant.ProductID = product.ID
+			db.Save(&variant)
+			log.Println(_color.ThisF("green", "[seeder] ✅ success seeding |- product variant: [id: %d, name: %s]", variant.ID, variant.Name))
+		}
 	}
+
 	return nil
 }
