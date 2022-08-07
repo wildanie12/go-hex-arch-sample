@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductClient interface {
 	List(ctx context.Context, in *Void, opts ...grpc.CallOption) (*ProductListResponse, error)
-	Show(ctx context.Context, in *ShowProductRequest, opts ...grpc.CallOption) (*ProductResponse, error)
+	Show(ctx context.Context, in *ShowProductRequest, opts ...grpc.CallOption) (*ProductShowResponse, error)
 	Store(ctx context.Context, in *StoreProductRequest, opts ...grpc.CallOption) (*WriteProductResponse, error)
 	Update(ctx context.Context, in *UpdateProductRequest, opts ...grpc.CallOption) (*WriteProductResponse, error)
 	Delete(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*WriteProductResponse, error)
@@ -46,8 +46,8 @@ func (c *productClient) List(ctx context.Context, in *Void, opts ...grpc.CallOpt
 	return out, nil
 }
 
-func (c *productClient) Show(ctx context.Context, in *ShowProductRequest, opts ...grpc.CallOption) (*ProductResponse, error) {
-	out := new(ProductResponse)
+func (c *productClient) Show(ctx context.Context, in *ShowProductRequest, opts ...grpc.CallOption) (*ProductShowResponse, error) {
+	out := new(ProductShowResponse)
 	err := c.cc.Invoke(ctx, "/product.Product/Show", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -87,7 +87,7 @@ func (c *productClient) Delete(ctx context.Context, in *DeleteProductRequest, op
 // for forward compatibility
 type ProductServer interface {
 	List(context.Context, *Void) (*ProductListResponse, error)
-	Show(context.Context, *ShowProductRequest) (*ProductResponse, error)
+	Show(context.Context, *ShowProductRequest) (*ProductShowResponse, error)
 	Store(context.Context, *StoreProductRequest) (*WriteProductResponse, error)
 	Update(context.Context, *UpdateProductRequest) (*WriteProductResponse, error)
 	Delete(context.Context, *DeleteProductRequest) (*WriteProductResponse, error)
@@ -101,7 +101,7 @@ type UnimplementedProductServer struct {
 func (UnimplementedProductServer) List(context.Context, *Void) (*ProductListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedProductServer) Show(context.Context, *ShowProductRequest) (*ProductResponse, error) {
+func (UnimplementedProductServer) Show(context.Context, *ShowProductRequest) (*ProductShowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Show not implemented")
 }
 func (UnimplementedProductServer) Store(context.Context, *StoreProductRequest) (*WriteProductResponse, error) {

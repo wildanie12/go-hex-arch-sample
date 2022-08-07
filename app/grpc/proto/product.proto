@@ -15,6 +15,13 @@ message ProductResponse {
     string slug = 7;
 }
 
+message ProductShowResponse {
+    bool success = 1;
+    string status = 2;
+    int32 code = 3;
+    ProductResponse data = 4;
+}
+
 message ProductListResponse {
     bool success = 1;
     string status = 2;
@@ -59,7 +66,7 @@ message Void {
 
 service Product {
     rpc List(Void) returns (ProductListResponse);
-    rpc Show(ShowProductRequest) returns (ProductResponse);
+    rpc Show(ShowProductRequest) returns (ProductShowResponse);
     rpc Store(StoreProductRequest) returns (WriteProductResponse);
     rpc Update(UpdateProductRequest) returns (WriteProductResponse);
     rpc Delete(DeleteProductRequest) returns (WriteProductResponse);
