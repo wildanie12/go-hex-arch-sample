@@ -11,7 +11,7 @@ import (
 func Encode(obj interface{}) string {
 	json, err := json.MarshalIndent(obj, "", "  ")
 	if err != nil {
-		log.Println(color.ThisF("yellow", "[JsonUtil] fail to encode json: %v", err))
+		log.Println(color.ThisF("yellow", "[jsonUtil] fail to encode json: %v", err))
 	}
 	return string(json)
 }
