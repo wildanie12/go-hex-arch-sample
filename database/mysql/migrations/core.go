@@ -25,5 +25,11 @@ func Start() {
 		return
 	}
 	log.Println(_color.ThisF("green", "[migration] ✅ done running migration"))
-
+	
+	err = seed(db)
+	if err != nil {
+		log.Println(_color.ThisF("red", "[migration] failed seeding data: %v", err))
+		return
+	}
+	log.Println(_color.ThisF("green", "[migration] ✅ done running data seeder "))
 }
