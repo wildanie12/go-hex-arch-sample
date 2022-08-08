@@ -1,12 +1,21 @@
 package models
 
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
+
 // Product model
 type Product struct {
-	ID int
-	Name string
-	Description string
+	ID uint 					`gorm:"primarykey" faker:"-"`
+	Name string					`faker:"name"`
+	Description string			`faker:"sentence"`
 	Price int
-	Category string
-	Seller string
-	Slug string
+	Category string				`faker:"word"`
+	Seller string				`faker:"name"`
+	Slug string					`faker:"word"`
+    CreatedAt time.Time			`faker:"-"`
+    UpdatedAt time.Time			`faker:"-"`
+    DeletedAt gorm.DeletedAt 	`gorm:"index" faker:"-"`
 }
