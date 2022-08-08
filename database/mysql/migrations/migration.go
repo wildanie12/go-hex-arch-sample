@@ -1,24 +1,17 @@
-package main
+package migrations
 
 import (
-	"log"
-
-	"github.com/joho/godotenv"
-	_config "github.com/wildanie12/go-hex-arch-sample/config"
-	_mysql "github.com/wildanie12/go-hex-arch-sample/database/mysql"
-	_color "github.com/wildanie12/go-hex-arch-sample/utils/color"
+	_entities "github.com/wildanie12/go-hex-arch-sample/entities"
+	"gorm.io/gorm"
 )
 
-//go:generate ./migrate.sh
+func migrate(db *gorm.DB) error {
+	err := db.AutoMigrate(
 
-func main() {
-	err := godotenv.Load("../../../.env")
-	if err != nil {
-		log.Println(_color.This("red", "[config] cannot load .env file configuration"))
-	}
+		// Entity Migration, write here...
+		&_entities.Product{},
+		
+	)
 
-	config := _config.New()
-
-	_ = _mysql.New(config)
-
+	return err
 }
