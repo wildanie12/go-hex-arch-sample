@@ -1,6 +1,6 @@
 package product
 
-import _models "github.com/wildanie12/go-hex-arch-sample/models"
+import _models "github.com/wildanie12/go-hex-arch-sample/entities"
 
 // Service struct
 type Service struct {
