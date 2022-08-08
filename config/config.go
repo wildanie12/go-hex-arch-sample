@@ -13,7 +13,7 @@ type AppConfig struct {
 	MySQL struct {
 		Host string
 		Port string
-		Name string
+		Database string
 		Username string
 		Password string
 	}
@@ -29,6 +29,7 @@ func New() *AppConfig {
 		// config modules initializations
 		initHTTP(appConfig)
 		initGRPC(appConfig)
+		initMySQL(appConfig)
 	}
 	return appConfig
 }
