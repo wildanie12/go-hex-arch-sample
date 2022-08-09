@@ -2,6 +2,7 @@ package repositories
 
 import _entities "github.com/wildanie12/go-hex-arch-sample/entities"
 
+// ProductInterface main declaration
 type ProductInterface interface {
 	
 	FindAll() ([]_entities.Product, error)
