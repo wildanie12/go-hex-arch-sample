@@ -10,7 +10,7 @@ func migrate(db *gorm.DB) error {
 
 		// Entity Migration, write here...
 		&_entities.Product{},
-		
+		&_entities.ProductVariant{},
 	)
 
 	return err
