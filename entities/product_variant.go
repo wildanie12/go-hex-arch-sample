@@ -7,5 +7,5 @@ type ProductVariant struct {
 	Name string			`gorm:"size:255" faker:"word"`
 	Price int64
 	Description string	`faker:"paragraph"`
-	Product Product		`gorm:"foreignKey:ProductID;references:ID"`
+	Product Product		`gorm:"foreignKey:ProductID;references:ID" faker:"-"`
 }
