@@ -23,6 +23,10 @@ func NewMySQL(db *gorm.DB) *Repository {
 	}
 }
 
+func (repo *Repository) FilterName(name string) {
+	repo.db = repo.db.Where("name LIKE ?", "%" + name + "%")
+}
+
 // FindAll product data
 func (repo *Repository) FindAll() ([]_entities.Product, error) {
 	products := []_entities.Product{}
@@ -39,21 +43,21 @@ func (repo *Repository) FindAll() ([]_entities.Product, error) {
 }
 
 // Find single product data based on filter
-func (repo Repository) Find(id int) (_entities.Product, error) {
+func (repo *Repository) Find(id int) (_entities.Product, error) {
 	panic("implemented")
 }
 
 // Store new product data
-func (repo Repository) Store(product _entities.Product) (_entities.Product, error) {
+func (repo *Repository) Store(product _entities.Product) (_entities.Product, error) {
 	panic("implemented")
 }
 
 // Update existing product data
-func (repo Repository) Update(product _entities.Product) (_entities.Product, error) {
+func (repo *Repository) Update(product _entities.Product) (_entities.Product, error) {
 	panic("implemented")
 }
 
 // Delete existing product data
-func (repo Repository) Delete(id int) error {
+func (repo *Repository) Delete(id int) error {
 	panic("implemented")
 }
