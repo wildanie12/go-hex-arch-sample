@@ -19,5 +19,6 @@ type Product struct {
     UpdatedAt time.Time					`faker:"-"`
     DeletedAt gorm.DeletedAt 			`gorm:"index" faker:"-"`
 
-	ProductVariants []ProductVariant	`gorm:"foregnKey:ProductID;references:ID" faker:"-"`
+	ProductVariants []ProductVariant	`gorm:"foreignKey:ProductID;references:ID" faker:"-"`
+	ProductQuantity []ProductQuantity	`gorm:"polymorphic:Productable"`
 }
