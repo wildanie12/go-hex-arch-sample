@@ -5,6 +5,9 @@ import (
 	"log"
 	"runtime"
 	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // reset color
@@ -51,7 +54,8 @@ func init() {
 // This can colorize your str
 // Available color are:  Red, Green, Yellow, Blue, Purple, Cyan, Gray, White
 func This(color, str string) string {
-	switch strings.Title(strings.ToLower(color)) {
+	
+	switch cases.Title(language.English).String(strings.ToLower(color)) {
 	case "Red":
 		return fmt.Sprintf("%s%s%s", red, str, reset)
 	case "Green":
@@ -76,7 +80,7 @@ func This(color, str string) string {
 // ThisF can colorize your str
 // Available color are:  Red, Green, Yellow, Blue, Purple, Cyan, Gray, White
 func ThisF(color, str string, args ...any) string {
-	switch strings.Title(strings.ToLower(color)) {
+	switch cases.Title(language.English).String(strings.ToLower(color)) {
 	case "Red":
 		return fmt.Sprintf("%s%s%s", red, fmt.Sprintf(str, args...), reset)
 	case "Green":
