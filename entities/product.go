@@ -9,12 +9,12 @@ import (
 // Product model
 type Product struct {
 	ID uint 							`gorm:"primarykey" faker:"-"`
-	Name string							`faker:"name"`
+	Name string							`size:"255" faker:"name"`
 	Description string					`faker:"sentence"`
 	Price int64	
-	Category string						`faker:"word"`
-	Seller string						`faker:"name"`
-	Slug string							`faker:"word"`
+	Category string						`size:"255" faker:"word"`
+	Seller string						`size:"255" faker:"name"`
+	Slug string							`size:"255" faker:"word"`
     CreatedAt time.Time					`faker:"-"`
     UpdatedAt time.Time					`faker:"-"`
     DeletedAt gorm.DeletedAt 			`gorm:"index" faker:"-"`

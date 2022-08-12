@@ -3,6 +3,7 @@ package migrations
 import (
 	"log"
 	"math/rand"
+	"strconv"
 
 	"gorm.io/gorm"
 
@@ -32,6 +33,7 @@ func seed(db *gorm.DB) error {
 				log.Println(_color.ThisF("yellow", "[seeder] failed faking data: %v", err))
 			}
 			variant.ProductID = product.ID
+			variant.Sku = variant.Name + "-" + strconv.Itoa(rand.Intn(100))
 			db.Save(&variant)
 			log.Println(_color.ThisF("green", "[seeder] ✅ success seeding |- product variant: [id: %d, name: %s]", variant.ID, variant.Name))
 		}
