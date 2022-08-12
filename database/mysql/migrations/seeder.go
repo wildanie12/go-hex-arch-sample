@@ -36,6 +36,21 @@ func seed(db *gorm.DB) error {
 			variant.Sku = variant.Name + "-" + strconv.Itoa(rand.Intn(100))
 			db.Save(&variant)
 			log.Println(_color.ThisF("green", "[seeder] ✅ success seeding |- product variant: [id: %d, name: %s]", variant.ID, variant.Name))
+
+		// Product Quantity (if variants non-existence)
+		nQuantities := rand.Intn(3)
+		for j := 0; j < nQuantities; j++ {
+			if nVariants <= 0 {
+				quantity := _entities.ProductQuantity{}
+				if err := faker.FakeData(&quantity); err != nil {
+					log.Println(_color.ThisF("yellow", "[seeder] failed faking data: %v", err))
+				}
+				quantity.ProductableType = "products"
+				quantity.ProductableID = product.ID
+				quantity.CurrentStock = quantity.InitialStock - rand.Intn(5)
+				db.Save(&quantity)
+				log.Println(_color.ThisF("green", "[seeder] ✅ success seeding |- product quantity: [id: %d, init stock: %d]", quantity.ID, quantity.InitialStock))
+			}
 		}
 	}
 
