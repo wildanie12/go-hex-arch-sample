@@ -1,7 +1,12 @@
 package repositories
 
 import (
+	"log"
+	"net/http"
+
 	_entities "github.com/wildanie12/go-hex-arch-sample/entities"
+	_error "github.com/wildanie12/go-hex-arch-sample/entities/common/error"
+	_color "github.com/wildanie12/go-hex-arch-sample/utils/color"
 	"gorm.io/gorm"
 )
 
@@ -11,15 +16,26 @@ type Repository struct {
 }
 
 // New product repository
-func New(db *gorm.DB) *Repository {
+func NewMySQL(db *gorm.DB) *Repository {
+	db = db.Model(&_entities.Product{})
 	return &Repository{
 		db: db,
 	}
 }
 
 // FindAll product data
-func (repo Repository) FindAll() ([]_entities.Product, error) {
-	panic("implemented")
+func (repo *Repository) FindAll() ([]_entities.Product, error) {
+	products := []_entities.Product{}
+	tx := repo.db.Find(&products)
+	if tx.Error != nil {
+		log.Println(_color.ThisF("red", "[repository] ❌ mysql product repository error: %v", tx.Error))
+		return []_entities.Product{}, _error.Make(
+			http.StatusInternalServerError, 
+			"data source error",
+			"Product Data source error",
+		)
+	}
+	return products, nil
 }
 
 // Find single product data based on filter
