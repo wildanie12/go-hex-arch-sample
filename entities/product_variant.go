@@ -1,5 +1,9 @@
 package entities
 
+import (
+	"time"
+)
+
 type ProductVariant struct {
 	ID uint 							`gorm:"primaryKey"`
 	ProductID uint
@@ -7,6 +11,9 @@ type ProductVariant struct {
 	Name string							`gorm:"size:255" faker:"word"`
 	Price int64
 	Description string					`faker:"paragraph"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+
 	Product Product						`gorm:"foreignKey:ProductID;references:ID" faker:"-"`
 	ProductQuantity []ProductQuantity	`gorm:"polymorphic:Productable"`
 }
