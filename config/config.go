@@ -2,6 +2,9 @@ package config
 
 // AppConfig main struct
 type AppConfig struct {
+	App struct {
+		Env string
+	}
 	HTTP struct {
 		Host string
 		Port string
@@ -27,6 +30,7 @@ func New() *AppConfig {
 		appConfig = &AppConfig{}	
 
 		// config modules initializations
+		initApp(appConfig)
 		initHTTP(appConfig)
 		initGRPC(appConfig)
 		initMySQL(appConfig)
