@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// ProductVariant main struct, tagged with gorm and faker
 type ProductVariant struct {
 	ID uint 							`gorm:"primaryKey"`
 	ProductID uint

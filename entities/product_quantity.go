@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// ProductQuantity main struct, tagged with gorm and faker
 type ProductQuantity struct {
 	ID uint						`gorm:"primaryKey" faker:"-"`
 	ProductableType	string		`gorm:"size:255" faker:"oneof: products, product_variants"`
