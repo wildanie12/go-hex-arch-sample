@@ -1,0 +1,50 @@
+run:
+  timeout: "5m"
+linters:
+  enable-all: true
+  fast: true
+  enable:
+    - revive
+  disable:
+    - gochecknoglobals    # allow global variables (useful for tests)
+    - forcetypeassert     # ignore type assertion (mongodb confident primitives)
+    - gomnd               # ignore magic number enforcement.
+    - wsl                 # allow cuddling code together.
+    - nlreturn            # allow no blank line before return
+    - tagliatelle         # disable struct tag enforcement
+    - nosnakecase         # allow snake case for entity naming & pb files
+    - forbidigo           # keep allows printf
+    - containedctx        # ignore rule ctx on struct
+    - gochecknoinits      # ignore no init() enforcement
+    - funlen              # ignore method maximum lines
+    - gocognit            # ignore overkill complexity analysis, anti productive measure
+    - lll                 # conflicts with any thirdparty code generator
+    - maintidx            # too advanced complexity analysis, potential productivity bottleneck
+    - nestif              # todo: to be removed, refactor layered architecture on invoice.server.go
+    - gocyclo             # another uncontrollable advanced complexity analysis 
+    - goconst             # not yet ready for that kind of clean code
+linters-settings:
+  gosimple:
+    go: "1.17"
+    checks:
+      - -S1016
+  revive:
+    confidence: 0.8
+    severity: warning
+    ignore-generated-header: true
+    rules:
+      - name: var-naming
+        disabled: true
+      - name: exported
+        disabled: false
+        severity: error
+  lll:
+    line-length: 150
+  dupl:
+    threshold: 300
+issues:
+  include:
+    - EXC0012
+    - EXC0013
+    - EXC0014
+    - EXC0015
