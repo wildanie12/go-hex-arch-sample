@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// MySQLRepository
+// MySQLRepository main struct.
 type MySQLRepository struct {
 	dbInstance *lib.DatabaseInstance
 }
