@@ -15,7 +15,7 @@ type Repository struct {
 	db *gorm.DB
 }
 
-// New product repository
+// NewMySQL returns product repository using mysql datasource
 func NewMySQL(db *gorm.DB) *Repository {
 	db = db.Model(&_entities.Product{})
 	return &Repository{
@@ -23,6 +23,7 @@ func NewMySQL(db *gorm.DB) *Repository {
 	}
 }
 
+// FilterName return 
 func (repo *Repository) FilterName(name string) {
 	repo.db = repo.db.Where("name LIKE ?", "%" + name + "%")
 }
