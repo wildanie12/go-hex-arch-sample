@@ -17,7 +17,7 @@ func main() {
 	}
 
 	// -- construct your presenters here...
-	appHttp := appHttp.New()
+	appHttp := appHttp.New(config.Get().HTTP.Port)
 
 	// -- assign presenters
 	frontendPresenter := internal.NewPresenter(appHttp, &s)
