@@ -6,7 +6,6 @@ require (
 	github.com/go-errors/errors v1.5.1
 	github.com/joho/godotenv v1.4.0
 	github.com/labstack/echo/v4 v4.11.4
-	golang.org/x/text v0.14.0
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/gorm v1.25.5
 )
@@ -23,4 +22,5 @@ require (
 	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 )
