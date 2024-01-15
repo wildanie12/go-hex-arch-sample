@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/wildanie12/go-hex-arch-sample/internal/service/cart"
+	"github.com/wildanie12/go-hex-arch-sample/internal/service/order"
 	"github.com/wildanie12/go-hex-arch-sample/internal/service/product"
 )
 
@@ -9,6 +10,7 @@ import (
 type ServiceAPI struct {
 	CartService    *cart.Service
 	ProductService *product.Service
+	OrderService   *order.Service
 }
 
 // AppPresenter interface holds contracts for valid app presentation layer.
