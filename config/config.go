@@ -16,6 +16,9 @@ type AppConfig struct {
 	HTTP                    struct {
 		Port string
 	}
+	MySQL struct {
+		OrderURI string
+	}
 }
 
 var appConfig *AppConfig
@@ -44,6 +47,9 @@ func initConfig() *AppConfig {
 
 	// http config
 	cfg.HTTP.Port = getEnvWarn("HTTP_PORT")
+
+	// mysql config
+	cfg.MySQL.OrderURI = getEnvWarn("MYSQL_ORDER_URI")
 
 	return &cfg
 }
